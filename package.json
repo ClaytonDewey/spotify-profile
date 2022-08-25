@@ -16,5 +16,8 @@
   "bugs": {
     "url": "https://github.com/ClaytonDewey/spotify-profile/issues"
   },
-  "homepage": "https://github.com/ClaytonDewey/spotify-profile#readme"
+  "homepage": "https://github.com/ClaytonDewey/spotify-profile#readme",
+  "dependencies": {
+    "express": "^4.18.1"
+  }
 }
