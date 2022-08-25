@@ -1,0 +1,20 @@
+{
+  "name": "spotify-profile",
+  "version": "1.0.0",
+  "description": "A web app for visualizing personalized Spotify data built with React, Express, and the Spotify API",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ClaytonDewey/spotify-profile.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ClaytonDewey/spotify-profile/issues"
+  },
+  "homepage": "https://github.com/ClaytonDewey/spotify-profile#readme"
+}
