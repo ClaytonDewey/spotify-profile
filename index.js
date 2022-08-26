@@ -54,17 +54,79 @@ app.get("/login", (req, res) => {
 });
 
 app.get("/callback", (req, res) => {
-  res.send("callback");
+  const code = req.query.code || null;
+
+  const searchParams = new URLSearchParams({
+    grant_type: "authorization_code",
+    code: code,
+    redirect_uri: REDIRECT_URI,
+  });
+  const queryParams = searchParams.toString();
+
+  axios({
+    method: "post",
+    url: "https://accounts.spotify.com/api/token",
+    data: queryParams,
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString("base64")}`,
+    },
+  })
+    .then((response) => {
+      if (response.status === 200) {
+        const { access_token, token_type } = response.data;
+
+        axios
+          .get("https://api.spotify.com/v1/me", {
+            headers: {
+              Authorization: `${token_type} ${access_token}`,
+            },
+          })
+          .then((response) => {
+            res.send(`<pre>${JSON.stringify(response.data, null, 2)}</pre>`);
+          })
+          .catch((error) => {
+            res.send(error);
+          });
+      } else {
+        res.send(response);
+      }
+    })
+    .catch((error) => {
+      res.send(error);
+    });
+});
+
+app.get("/refresh_token", (req, res) => {
+  const { refresh_token } = req.query;
+
+  const searchParams = new URLSearchParams({
+    grant_type: "refresh_token",
+    refresh_token: refresh_token,
+  });
+  const queryParams = searchParams.toString();
+
+  axios({
+    method: "post",
+    url: "https://accounts.spotify.com/api/token",
+    data: queryParams,
+    headers: {
+      "content-type": "application/x-www-form-urlencoded",
+      Authorization: `Basic ${new Buffer.from(
+        `${CLIENT_ID}:${CLIENT_SECRET}`
+      ).toString("base64")}`,
+    },
+  })
+    .then((response) => {
+      res.send(response.data);
+    })
+    .catch((error) => {
+      res.send(error);
+    });
 });
 
 app.listen(port, () => {
   console.log(`Express app listening at http://localhost:${port}`);
 });
-
-// const searchparams = new URLSearchParams({
-//   clien_id: CLIENT_ID,
-//   response_type: "code",
-//   redirect_uri: REDIRECT_URI,
-// });
-
-// const queryParams = searchparams.toString();
