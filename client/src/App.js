@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { accessToken, logout, getCurrentUserProfile } from "./spotify";
+import { catchErrors } from "./utils";
 import "./App.css";
 
 function App() {
@@ -10,15 +11,11 @@ function App() {
     setToken(accessToken);
 
     const fetchData = async () => {
-      try {
-        const { data } = await getCurrentUserProfile();
-        setProfile(data);
-      } catch(e) {
-        console.error(e)
-      }
+      const { data } = await getCurrentUserProfile();
+      setProfile(data);
     }
 
-    fetchData();
+    catchErrors(fetchData());
 
   }, []);
 
