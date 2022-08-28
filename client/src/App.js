@@ -7,35 +7,10 @@ import {
 } from "react-router-dom";
 import { accessToken, logout, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./utils";
-import styled, { createGlobalStyle } from "styled-components/macro";
+import styled from "styled-components/macro";
+import { GlobalStyle } from "./styles";
 import Container from "./Test";
 import Profile from "./Profile";
-
-const GlobalStyle = createGlobalStyle`
-  :root {
-    --black: #121212;
-    --green: #1db954;
-    --white: #ffffff;
-
-    --font: 'Circular Std', --apple-system, BlinkMacSystemFont, system-ui, sans-serif;
-  }
-  html {
-    box-sizing: border-box;
-  }
-
-  *,
-  *::before,
-  *::after {
-    box-sizing: inherit;
-  }
-
-  body {
-    margin: 0;
-    padding: 0;
-    background-color: var(--black);
-    color: var(--white);
-  }
-`;
 
 const StyledLogInButton = styled.a`
   background-color: var(--green);
