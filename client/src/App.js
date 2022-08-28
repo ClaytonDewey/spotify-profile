@@ -3,14 +3,48 @@ import {
   BrowserRouter as Router,
   Routes,
   Route,
-  Link,
   useLocation,
 } from "react-router-dom";
 import { accessToken, logout, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./utils";
-import "./App.css";
+import styled, { createGlobalStyle } from "styled-components/macro";
 import Container from "./Test";
 import Profile from "./Profile";
+
+const GlobalStyle = createGlobalStyle`
+  :root {
+    --black: #121212;
+    --green: #1db954;
+    --white: #ffffff;
+
+    --font: 'Circular Std', --apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+  }
+  html {
+    box-sizing: border-box;
+  }
+
+  *,
+  *::before,
+  *::after {
+    box-sizing: inherit;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--black);
+    color: var(--white);
+  }
+`;
+
+const StyledLogInButton = styled.a`
+  background-color: var(--green);
+  color: var(--white);
+  padding: 10px 20px;
+  margin: 20px auto;
+  border-radius: 30px;
+  display: inline-block;
+`;
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -39,11 +73,12 @@ function App() {
 
   return (
     <div className="App">
+      <GlobalStyle />
       <header className="App-header">
         {!token ? (
-          <a className="App-link" href="http://localhost:8888/login">
+          <StyledLogInButton href="http://localhost:8888/login">
             Log in to Spotify
-          </a>
+          </StyledLogInButton>
         ) : (
           <Router>
             <ScrollToTop />
