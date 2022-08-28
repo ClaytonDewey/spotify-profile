@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists } from "./pages";
+import { Login, Profile, TopArtists, TopTracks } from "./pages";
 import styled from "styled-components/macro";
 import Container from "./Test";
 
@@ -58,10 +58,7 @@ function App() {
               <ScrollToTop />
               <Routes>
                 <Route path="/top-artists" element={<TopArtists />} />
-                <Route
-                  path="/top-tracks"
-                  element={<Container title={"Top Tracks"} />}
-                />
+                <Route path="/top-tracks" element={<TopTracks />} />
                 <Route
                   path="/playlists/:id"
                   element={<Container title={"Playlist xxx"} />}
