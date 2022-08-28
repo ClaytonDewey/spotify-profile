@@ -8,9 +8,25 @@ import {
 import { accessToken, logout, getCurrentUserProfile } from "./spotify";
 import { catchErrors } from "./utils";
 import { GlobalStyle } from "./styles";
-import { Login } from "./pages";
+import { Login, Profile } from "./pages";
+import styled from "styled-components/macro";
 import Container from "./Test";
-import Profile from "./Profile";
+
+const StyledLogoutButton = styled.button`
+  position: absolute;
+  top: var(--spacing-sm);
+  right: var(--spacing-md);
+  padding: var(--spacing-xs) var(--spacing-sm);
+  background-color: rgba(0, 0, 0, 0.7);
+  color: var(--white);
+  font-size: var(--fz-sm);
+  font-weight: 700;
+  border-radius: var(--border-radius-pill);
+  z-index: 10;
+  @media (min-width: 768px) {
+    right: var(--spacing-lg);
+  }
+`;
 
 function ScrollToTop() {
   const { pathname } = useLocation();
@@ -44,31 +60,32 @@ function App() {
         {!token ? (
           <Login />
         ) : (
-          <Router>
-            <ScrollToTop />
-            <Routes>
-              <Route
-                path="/top-artists"
-                element={<Container title={"Top Artists"} />}
-              />
-              <Route
-                path="/top-tracks"
-                element={<Container title={"Top Tracks"} />}
-              />
-              <Route
-                path="/playlists/:id"
-                element={<Container title={"Playlist xxx"} />}
-              />
-              <Route
-                path="/playlists"
-                element={<Container title={"Playlists"} />}
-              />
-              <Route
-                path="/"
-                element={<Profile logout={logout} profile={profile} />}
-              />
-            </Routes>
-          </Router>
+          <>
+            <StyledLogoutButton onClick={logout}>Log Out</StyledLogoutButton>
+
+            <Router>
+              <ScrollToTop />
+              <Routes>
+                <Route
+                  path="/top-artists"
+                  element={<Container title={"Top Artists"} />}
+                />
+                <Route
+                  path="/top-tracks"
+                  element={<Container title={"Top Tracks"} />}
+                />
+                <Route
+                  path="/playlists/:id"
+                  element={<Container title={"Playlist xxx"} />}
+                />
+                <Route
+                  path="/playlists"
+                  element={<Container title={"Playlists"} />}
+                />
+                <Route path="/" element={<Profile />} />
+              </Routes>
+            </Router>
+          </>
         )}
       </header>
     </div>
