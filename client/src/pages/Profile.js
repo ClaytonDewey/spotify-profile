@@ -1,11 +1,17 @@
 import { useState, useEffect } from "react";
 import { catchErrors } from "../utils";
-import { getCurrentUserProfile, getCurrentUserPlaylists } from "../spotify";
+import {
+  getCurrentUserProfile,
+  getCurrentUserPlaylists,
+  getTopArtists,
+} from "../spotify";
+import { SectionWrapper, ArtistsGrid } from "../components";
 import { StyledHeader } from "../styles";
 
 const Profile = () => {
   const [profile, setProfile] = useState(null);
   const [playlists, setPlaylists] = useState(null);
+  const [topArtists, setTopArtists] = useState(null);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -14,10 +20,15 @@ const Profile = () => {
 
       const userPlaylists = await getCurrentUserPlaylists();
       setPlaylists(userPlaylists.data);
+
+      const userTopArtist = await getTopArtists();
+      setTopArtists(userTopArtist.data);
     };
 
     catchErrors(fetchData());
   }, []);
+
+  console.log(topArtists);
 
   return (
     <>
@@ -48,6 +59,17 @@ const Profile = () => {
             </div>
           </div>
         </StyledHeader>
+      )}
+
+      {topArtists && (
+        <main>
+          <SectionWrapper
+            title="Top artists this month"
+            seeAllLink="/top-artists"
+          >
+            <ArtistsGrid artists={topArtists.items.slice(0, 10)} />
+          </SectionWrapper>
+        </main>
       )}
     </>
   );
