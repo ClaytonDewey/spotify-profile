@@ -7,9 +7,15 @@ import {
 } from "react-router-dom";
 import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks, Playlists } from "./pages";
+import {
+  Login,
+  Profile,
+  TopArtists,
+  TopTracks,
+  Playlists,
+  Playlist,
+} from "./pages";
 import styled from "styled-components/macro";
-import Container from "./Test";
 
 const StyledLogoutButton = styled.button`
   position: absolute;
@@ -59,10 +65,7 @@ function App() {
               <Routes>
                 <Route path="/top-artists" element={<TopArtists />} />
                 <Route path="/top-tracks" element={<TopTracks />} />
-                <Route
-                  path="/playlists/:id"
-                  element={<Container title={"Playlist xxx"} />}
-                />
+                <Route path="/playlists/:id" element={<Playlist />} />
                 <Route path="/playlists" element={<Playlists />} />
                 <Route path="/" element={<Profile />} />
               </Routes>
