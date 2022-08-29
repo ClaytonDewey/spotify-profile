@@ -7,7 +7,7 @@ import {
 } from "react-router-dom";
 import { accessToken, logout } from "./spotify";
 import { GlobalStyle } from "./styles";
-import { Login, Profile, TopArtists, TopTracks } from "./pages";
+import { Login, Profile, TopArtists, TopTracks, Playlists } from "./pages";
 import styled from "styled-components/macro";
 import Container from "./Test";
 
@@ -63,10 +63,7 @@ function App() {
                   path="/playlists/:id"
                   element={<Container title={"Playlist xxx"} />}
                 />
-                <Route
-                  path="/playlists"
-                  element={<Container title={"Playlists"} />}
-                />
+                <Route path="/playlists" element={<Playlists />} />
                 <Route path="/" element={<Profile />} />
               </Routes>
             </Router>
