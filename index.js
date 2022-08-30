@@ -138,6 +138,6 @@ app.get("*", (req, res) => {
   res.sendFile(path.resolve(__dirname, "./client/build", "index.html"));
 });
 
-app.listen(PORTS, () => {
+app.listen(PORT, () => {
   console.log(`Express app listening at http://localhost:${PORT}`);
 });
