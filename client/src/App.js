@@ -14,6 +14,7 @@ import {
   TopTracks,
   Playlists,
   Playlist,
+  CreatePlaylist,
 } from "./pages";
 import styled from "styled-components/macro";
 
@@ -67,6 +68,7 @@ function App() {
                 <Route path="/top-tracks" element={<TopTracks />} />
                 <Route path="/playlists/:id" element={<Playlist />} />
                 <Route path="/playlists" element={<Playlists />} />
+                <Route path="/create-playlist" element={<CreatePlaylist />} />
                 <Route path="/" element={<Profile />} />
               </Routes>
             </Router>

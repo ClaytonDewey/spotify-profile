@@ -1,4 +1,5 @@
 export { default as Login } from "./Login";
+export { default as CreatePlaylist } from "./CreatePlaylist";
 export { default as Playlist } from "./Playlist";
 export { default as Playlists } from "./Playlists";
 export { default as Profile } from "./Profile";
