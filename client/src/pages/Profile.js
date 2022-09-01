@@ -64,6 +64,7 @@ const Profile = () => {
                   {profile.followers.total} Follower
                   {profile.followers.total !== 1 ? "s" : ""}
                 </span>
+                <a href="/create-playlist">Create Playlist</a>
               </p>
             </div>
           </div>
