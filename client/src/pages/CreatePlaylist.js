@@ -1,7 +1,12 @@
-import { SearchBar } from "../components";
+import { SectionWrapper, SearchBar } from "../components";
+import { search } from "../spotify";
 
 const CreatePlaylist = () => {
-  return <SearchBar />;
+  return (
+    <SectionWrapper>
+      <SearchBar onSearch={search} />
+    </SectionWrapper>
+  );
 };
 
 export default CreatePlaylist;
