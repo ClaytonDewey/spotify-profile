@@ -194,28 +194,5 @@ export const getAudioFeaturesForTracks = (ids) => {
 };
 
 export const search = (term) => {
-  const search_url = `https://api.spotify.com/v1/search?type=track&q=${term.replace(
-    " ",
-    "%20"
-  )}`;
-  return fetch(search_url, {
-    headers: {
-      Authorization: `Bearer ${accessToken}`,
-    },
-  })
-    .then((response) => response.json())
-    .then((jsonResponse) => {
-      if (!jsonResponse.tracks) return [];
-
-      return jsonResponse.tracks.items.map((track) => {
-        return {
-          id: track.id,
-          name: track.name,
-          artist: track.artists[0].name,
-          album: track.album.name,
-          image: track.album.images[2],
-          uri: track.uri,
-        };
-      });
-    });
+  return axios.get(`/search?type=track&q=${term.replace(" ", "%20")}`);
 };
