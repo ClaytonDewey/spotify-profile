@@ -15,9 +15,9 @@ const CreatePlaylist = () => {
     };
 
     catchErrors(fetchData());
-  }, [searchTerm]);
+  });
 
-  console.log(searchResults.tracks.items);
+  // console.log(searchResults);
 
   return (
     <>
@@ -43,7 +43,24 @@ const CreatePlaylist = () => {
 
       <main>
         <SectionWrapper title="Search Results" breadcrumb={true}>
-          <p>Search results...</p>
+          {/* {searchResults &&
+            searchResults.tracks.items.map((item) => (
+              <div key={item.id}>
+                <img
+                  alt=""
+                  src={item.album.images[0].url}
+                  width={item.album.images[0].width}
+                  height={item.album.images[0].height}
+                  className="mr-1 mb-1"
+                />
+                <div className="track__info">
+                  <h3>{item.name}</h3>
+                  <p>
+                    {item.artist} | {item.album}
+                  </p>
+                </div>
+              </div>
+            ))} */}
         </SectionWrapper>
       </main>
     </>
