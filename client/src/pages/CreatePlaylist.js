@@ -1,5 +1,5 @@
 import { useState, useEffect, useCallback } from "react";
-import { SectionWrapper } from "../components";
+import { SectionWrapper, TrackList, Loader } from "../components";
 import { StyledHeader, StyledSearchBar } from "../styles";
 import { catchErrors } from "../utils";
 import { search } from "../spotify";
@@ -20,8 +20,6 @@ const CreatePlaylist = () => {
   useEffect(() => {
     catchErrors(handleSubmit());
   }, [handleSubmit]);
-
-  console.log(searchTerm);
 
   if (searchResults) {
     console.log(searchResults.tracks.items);
@@ -51,27 +49,15 @@ const CreatePlaylist = () => {
       </StyledHeader>
 
       <main>
-        <SectionWrapper title="Search Results" breadcrumb={true}>
-          {searchResults &&
-            searchResults.tracks.items.map((item) => (
-              <div key={item.id}>
-                <img
-                  alt={item.album.name}
-                  src={item.album.images[0].url}
-                  style={{
-                    width: 120,
-                    height: "auto",
-                  }}
-                />
-                <div className="track__info">
-                  <h3>{item.name}</h3>
-                  <p>
-                    {item.artists[0].name} | {item.album.name}
-                  </p>
-                </div>
-              </div>
-            ))}
-        </SectionWrapper>
+        {searchResults ? (
+          <SectionWrapper title="Top Tracks" breadcrumb={true}>
+            {searchResults && searchResults.tracks.items && (
+              <TrackList tracks={searchResults.tracks.items} />
+            )}
+          </SectionWrapper>
+        ) : (
+          <Loader />
+        )}
       </main>
     </>
   );
